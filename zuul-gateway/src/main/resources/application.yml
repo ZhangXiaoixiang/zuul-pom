@@ -7,12 +7,39 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-
+#ribbon路由方式1(容错和这里需要对应)
 zuul:
   routes:
     sale:
       path: /sale/**
       serviceId: zuul-sale-service
+    #      使用自定义的可以MyConfig可以将上面的注释掉试一试
+
+    #简单路由
+    mybaidu:
+      url: https://www.baidu.com/
+    #跳转路由
+    tiaozhuan:
+      path: /test/**
+      url: forward:/source/hello
+
+  #防止转发到其他系统的头部丢失,可以配置全局头部信息(局部也行,全局忽略也行)
+
+  sensitive-headers: accept-language,cookie
+
+# 设置路由端点,查看json
+#actuator  启用所有的监控端点 “*”号代表启用所有的监控端点，可以单独启用，例如，health，info，metrics
+#  spring boot 升为 2.0 后，为了安全，默认 Actuator 只暴露了2个端点，heath 和 info
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#        下面可选
+  endpoint:
+    health:
+      show-details: ALWAYS
 
 
-      
+
+

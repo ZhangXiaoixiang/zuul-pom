@@ -11,6 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class SaleApp {
 
     public static void main(String[] args) {
+        System.out.println("销售模块,属于调用者--");
         SpringApplication.run(SaleApp.class, args);
     }
 
